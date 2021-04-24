@@ -51,7 +51,7 @@ client.on("message", (message) => {
     return message.reply("pong")
   }
 
-  if (message.content == "!si") {
+  if (message.content == "!is") {
     let embed = new Discord.MessageEmbed()
     let img = "https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256"
     var duration = moment.duration(client.uptime).format(" D [일], H [시간], m [분], s [초]")
