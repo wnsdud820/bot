@@ -104,9 +104,8 @@ client.on("message", (message) => {
     let commandList = [
       { name: "!ping", desc: "봇이 잘 살아있는지 확인하기 위함" },
       { name: "!초대코드", desc: "서버 초대링크 생성" },
-      { name: "!청소(숫자)", desc: "메시지를 숫자만큼 삭제" },
+      { name: "!청소 (숫자)", desc: "메시지를 숫자만큼 삭제" },
       { name: "!embed", desc: "embed 예제1" },
-      { name: "!embed2", desc: "embed 예제2 " },
       { name: "!전체공지 (공지내용)", desc: "dm으로 전체 공지 보내기" },
       { name: "!전체공지2 (공지내용)", desc: "dm embed형식으로 전체 공지 보내기" },
       { name: "!help", desc: "명령어 설명 " },
