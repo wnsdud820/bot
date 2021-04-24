@@ -100,15 +100,19 @@ client.on("message", (message) => {
 
     message.channel.send(embed)
   } else if (message.content == "!help") {
-    let helpImg = "https://images-ext-1.discordapp.net/external/RyofVqSAVAi0H9-1yK6M8NGy2grU5TWZkLadG-rwqk0/https/i.imgur.com/EZRAPxR.png"
+    let helpImg = "https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/22QT/image/p-RX98d_34y9ElK_Qfwz8OfHhxM.jpg"
     let commandList = [
-      { name: "ping", desc: "현재 핑 상태" },
-      { name: "embed", desc: "embed 예제1" },
-      { name: "embed2", desc: "embed 예제2 (help)" },
-      { name: "!전체공지", desc: "dm으로 전체 공지 보내기" },
+      { name: "!ping", desc: "봇이 잘 살아있는지 확인하기 위함" },
+      { name: "!초대코드", desc: "서버 초대링크 생성" },
+      { name: "!청소(숫자)", desc: "메시지를 숫자만큼 삭제" },
+      { name: "!embed", desc: "embed 예제1" },
+      { name: "!embed2", desc: "embed 예제2 " },
+      { name: "!전체공지 (공지내용)", desc: "dm으로 전체 공지 보내기" },
+      { name: "!전체공지2 (공지내용)", desc: "dm embed형식으로 전체 공지 보내기" },
+      { name: "!help", desc: "명령어 설명 " },
     ]
     let commandStr = ""
-    let embed = new Discord.MessageEmbed().setAuthor("Help of 콜라곰 BOT", helpImg).setColor("#186de6").setFooter(`콜라곰 BOT ❤️`).setTimestamp()
+    let embed = new Discord.MessageEmbed().setAuthor("Help of helpingbot", helpImg).setColor("#186de6").setFooter(`HelpingBot`).setTimestamp()
 
     commandList.forEach((x) => {
       commandStr += `• \`\`${changeCommandStringLength(`${x.name}`)}\`\` : **${x.desc}**\n`
@@ -122,7 +126,7 @@ client.on("message", (message) => {
     if (message.member != null) {
       // 채널에서 공지 쓸 때
       let contents = message.content.slice("!전체공지2".length)
-      let embed = new Discord.MessageEmbed().setAuthor("공지 of 콜라곰 BOT").setColor("#186de6").setFooter(`콜라곰 BOT ❤️`).setTimestamp()
+      let embed = new Discord.MessageEmbed().setAuthor("공지 of HelpingBOT").setColor("#186de6").setFooter(`HelpingBOT`).setTimestamp()
 
       embed.addField("공지: ", contents)
 
