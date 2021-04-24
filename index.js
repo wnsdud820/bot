@@ -18,8 +18,8 @@ const client = new Discord.Client({ ws: { intents: intent_list } })
 const token = process.argv.length == 2 ? process.env.token : "" // heroku를 사용하지 않을꺼라면 const token = "디스코드 봇 토큰" 으로 바꿔주세요.
 const welcomeChannelName = "안녕하세요" // 입장 시 환영메시지를 전송 할 채널의 이름을 입력하세요.
 const byeChannelName = "안녕히가세요" // 퇴장 시 메시지를 전송 할 채널의 이름을 입력하세요.
-const welcomeChannelComment = "어서오세요." // 입장 시 전송할 환영메시지의 내용을 입력하세요.
-const byeChannelComment = "안녕히가세요." // 퇴장 시 전송할 메시지의 내용을 입력하세요.
+const welcomeChannelComment = "어서오고" // 입장 시 전송할 환영메시지의 내용을 입력하세요.
+const byeChannelComment = "드디어 갔네 저버러지 쒜끼" // 퇴장 시 전송할 메시지의 내용을 입력하세요.
 const roleName = "게스트" // 입장 시 지급 할 역할의 이름을 적어주세요.
 
 client.on("ready", () => {
@@ -47,11 +47,11 @@ client.on("guildMemberRemove", (member) => {
 client.on("message", (message) => {
   if (message.author.bot) return
 
-  if (message.content == "ping") {
+  if (message.content == "!ping") {
     return message.reply("pong")
   }
 
-  if (message.content == "!is") {
+  if (message.content == "!si") {
     let embed = new Discord.MessageEmbed()
     let img = "https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256"
     var duration = moment.duration(client.uptime).format(" D [일], H [시간], m [분], s [초]")
@@ -81,22 +81,22 @@ client.on("message", (message) => {
     message.channel.send(embed)
   }
 
-  if (message.content == "embed") {
-    let img = "https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256"
+  if (message.content == "!embed") {
+    let img = "https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/22QT/image/p-RX98d_34y9ElK_Qfwz8OfHhxM.jpg"
     let embed = new Discord.MessageEmbed()
-      .setTitle("타이틀")
+      .setTitle("제작자")
       .setURL("http://www.naver.com")
-      .setAuthor("나긋해", img, "http://www.naver.com")
+      .setAuthor("wnsdud820", img, "http://www.youtube.com")
       .setThumbnail(img)
       ////.addBlankField()  < 해당 구문은 .addField('\u200b', '\u200b') 로 대체할 수 있습니다. 
-      .addField("Inline field title", "Some value here")
-      .addField("Inline field title", "Some value here", true)
-      .addField("Inline field title", "Some value here", true)
-      .addField("Inline field title", "Some value here", true)
-      .addField("Inline field title", "Some value here1\nSome value here2\nSome value here3\n")
+      .addField("제작중", "제작중")
+      .addField("제작중", "제작중", true)
+      .addField("제작중", "제작중", true)
+      .addField("제작중", "제작중", true)
+      .addField("제작중", "제작중")
       ////.addBlankField()  < 해당 구문은 .addField('\u200b', '\u200b') 로 대체할 수 있습니다.  
       .setTimestamp()
-      .setFooter("나긋해가 만듬", img)
+      .setFooter("wnsdud820이 만듬", img)
 
     message.channel.send(embed)
   } else if (message.content == "!help") {
