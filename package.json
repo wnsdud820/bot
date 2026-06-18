@@ -1,12 +1,15 @@
 {
   "name": "bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Korean Discord.js moderation bot template",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "r": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "discord.js": "^12.4.1",
+    "moment": "^2.30.1",
+    "moment-duration-format": "^2.3.2"
   }
-} 
+}
