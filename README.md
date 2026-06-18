@@ -1,217 +1,233 @@
-# 디스코드 관리 봇
+# Korean Discord.js Moderation Bot
 
-디스코드 서버의 입장/퇴장 메시지, 자동 역할 지급, 공지 DM 발송, 초대코드 생성, 메시지 청소 기능을 제공하는 Discord.js 기반 봇입니다.
+한국어 Discord 서버 운영자를 위한 **Discord.js 기반 관리 봇 템플릿**입니다.
+
+입장/퇴장 메시지, 자동 역할 지급, 초대 링크 생성, 메시지 청소, 전체 공지 DM 발송 등 Discord 서버 운영에 필요한 기본 기능을 제공합니다.
+
+이 프로젝트는 Discord 봇 개발을 처음 시작하는 한국어 사용자가 이벤트 처리, 권한 확인, 환경변수 관리, 명령어 구조를 쉽게 학습할 수 있도록 만드는 것을 목표로 합니다.
+
+---
 
 ## 주요 기능
 
 * 서버 입장 시 환영 메시지 전송
-* 서버 입장 시 자동 역할 지급
-* 서버 퇴장 시 퇴장 메시지 전송
-* `!ping` 명령어로 봇 상태 확인
-* `!help` 명령어로 명령어 목록 확인
-* `!embed` 명령어로 임베드 예제 출력
-* `!si` 명령어로 봇/서버 정보 확인
-* `!초대코드` 명령어로 서버 초대 링크 생성
-* `!청소 숫자` 명령어로 메시지 삭제
-* `!전체공지 내용` 명령어로 서버 멤버에게 DM 공지 전송
-* `!전체공지2 내용` 명령어로 임베드 형식 DM 공지 전송
+* 서버 퇴장 시 안내 메시지 전송
+* 서버 입장 시 기본 역할 자동 지급
+* 서버 초대 링크 생성
+* 메시지 청소 기능
+* 특정 유저 메시지 청소 기능
+* 전체 유저 대상 DM 공지 전송
+* Embed 형식의 공지 전송
+* 봇 상태 및 서버 정보 확인
+* 기본 명령어 도움말 제공
+
+---
 
 ## 사용 기술
 
 * Node.js
-* Discord.js
-* Moment.js
-* Moment Duration Format
+* JavaScript
+* Discord.js v12
+* moment
+* moment-duration-format
+
+---
 
 ## 설치 방법
 
 먼저 Node.js를 설치한 뒤, 프로젝트 폴더에서 아래 명령어를 실행합니다.
 
 ```bash
-npm init -y
+npm install
+```
+
+`package.json`에 필요한 패키지가 포함되어 있으므로 일반적으로는 `npm install`만 실행하면 됩니다.
+
+직접 패키지를 설치해야 하는 경우 아래 명령어를 사용할 수 있습니다.
+
+```bash
 npm install discord.js@12 moment moment-duration-format
 ```
 
-## 파일 구성 예시
-
-```txt
-discord-bot/
-├── index.js
-├── package.json
-└── README.md
-```
-
-## 봇 실행 전 준비
-
-`index.js` 상단에 아래 코드를 추가해야 합니다.
-
-```js
-const moment = require("moment")
-require("moment-duration-format")
-```
-
-그리고 봇 토큰을 설정합니다.
-
-Heroku 또는 환경변수를 사용할 경우:
-
-```js
-const token = process.env.token
-```
-
-직접 토큰을 넣을 경우:
-
-```js
-const token = "디스코드 봇 토큰"
-```
-
-## 설정 값 수정
-
-아래 부분을 자신의 서버에 맞게 수정하세요.
-
-```js
-const welcomeChannelName = "안녕하세요"
-const byeChannelName = "안녕히가세요"
-const welcomeChannelComment = "어서오고"
-const byeChannelComment = "퇴장 메시지"
-const roleName = "게스트"
-```
-
-### 설정 설명
-
-| 설정 이름                   | 설명                    |
-| ----------------------- | --------------------- |
-| `welcomeChannelName`    | 유저 입장 시 메시지를 보낼 채널 이름 |
-| `byeChannelName`        | 유저 퇴장 시 메시지를 보낼 채널 이름 |
-| `welcomeChannelComment` | 입장 시 보낼 환영 메시지        |
-| `byeChannelComment`     | 퇴장 시 보낼 메시지           |
-| `roleName`              | 입장 시 자동으로 지급할 역할 이름   |
+---
 
 ## 실행 방법
+
+### 1. 봇 토큰 설정
+
+보안을 위해 Discord 봇 토큰은 코드에 직접 작성하지 않는 것을 권장합니다.
+
+이 프로젝트는 아래 환경변수 이름을 사용합니다.
+
+```txt
+token
+```
+
+### macOS / Linux
+
+```bash
+export token="디스코드_봇_토큰"
+npm start
+```
+
+### Windows PowerShell
+
+```powershell
+$env:token="디스코드_봇_토큰"
+npm start
+```
+
+### Windows CMD
+
+```cmd
+set token=디스코드_봇_토큰
+npm start
+```
+
+---
+
+## 실행 명령어
+
+```bash
+npm start
+```
+
+또는
 
 ```bash
 node index.js
 ```
 
-정상적으로 실행되면 콘솔에 아래 문구가 출력됩니다.
+---
 
-```txt
-켰다.
+## 기본 설정
+
+`index.js` 상단에서 아래 값을 원하는 서버 환경에 맞게 수정할 수 있습니다.
+
+```js
+const welcomeChannelName = "안녕하세요";
+const byeChannelName = "안녕히가세요";
+
+const welcomeChannelComment = "어서오세요!";
+const byeChannelComment = "서버를 떠났습니다.";
+
+const roleName = "게스트";
 ```
+
+### 설정 설명
+
+| 설정값                     | 설명                     |
+| ----------------------- | ---------------------- |
+| `welcomeChannelName`    | 입장 메시지를 보낼 채널 이름       |
+| `byeChannelName`        | 퇴장 메시지를 보낼 채널 이름       |
+| `welcomeChannelComment` | 유저 입장 시 전송할 메시지        |
+| `byeChannelComment`     | 유저 퇴장 시 전송할 메시지        |
+| `roleName`              | 유저 입장 시 자동으로 지급할 역할 이름 |
+
+---
 
 ## 명령어 목록
 
-| 명령어         | 설명                                      |
-| ----------- | --------------------------------------- |
-| `!ping`     | 봇이 정상 작동 중인지 확인합니다.                     |
-| `!help`     | 사용 가능한 명령어 목록을 보여줍니다.                   |
-| `!embed`    | 임베드 메시지 예제를 출력합니다.                      |
-| `!si`       | 봇의 RAM 사용량, 실행 시간, 서버 수, 유저 수 등을 보여줍니다. |
-| `!초대코드`     | 현재 채널의 서버 초대 링크를 생성합니다.                 |
-| `!청소 숫자`    | 입력한 숫자만큼 메시지를 삭제합니다.                    |
-| `!전체공지 내용`  | 서버 멤버에게 일반 DM 공지를 전송합니다.                |
-| `!전체공지2 내용` | 서버 멤버에게 임베드 형식 DM 공지를 전송합니다.            |
+| 명령어          | 설명                                   |
+| ------------ | ------------------------------------ |
+| `!ping`      | 봇이 정상 작동 중인지 확인합니다.                  |
+| `!si`        | 봇의 실행 시간, 메모리 사용량, 서버 수 등 정보를 확인합니다. |
+| `!embed`     | Embed 메시지 예제를 출력합니다.                 |
+| `!help`      | 사용 가능한 명령어 목록을 확인합니다.                |
+| `!초대코드`      | 현재 채널 기준으로 서버 초대 링크를 생성합니다.          |
+| `!청소 숫자`     | 입력한 숫자만큼 메시지를 삭제합니다.                 |
+| `!청소 @유저 숫자` | 특정 유저의 메시지를 입력한 숫자만큼 삭제합니다.          |
+| `!전체공지 내용`   | 서버 멤버에게 일반 DM 공지를 전송합니다.             |
+| `!전체공지2 내용`  | 서버 멤버에게 Embed 형식의 DM 공지를 전송합니다.      |
+
+---
 
 ## 관리자 권한이 필요한 명령어
 
-아래 명령어는 `MANAGE_MESSAGES` 권한이 있어야 사용할 수 있습니다.
+아래 명령어는 `MANAGE_MESSAGES` 권한을 가진 사용자만 사용할 수 있습니다.
 
-```txt
-!청소
-!전체공지
-!전체공지2
-```
+* `!청소`
+* `!전체공지`
+* `!전체공지2`
 
-권한이 없으면 아래와 같은 메시지가 출력됩니다.
+봇도 메시지 삭제, 초대 링크 생성, 역할 지급, DM 전송 등에 필요한 권한을 가지고 있어야 정상적으로 작동합니다.
 
-```txt
-명령어를 수행할 관리자 권한을 소지하고 있지않습니다.
-```
+---
 
-## 봇 초대 시 필요한 권한
+## Discord 봇 권한 안내
 
-봇을 서버에 초대할 때 아래 권한을 허용해야 정상 작동합니다.
+봇을 서버에 초대할 때 아래 권한이 필요할 수 있습니다.
 
+* 메시지 보기
 * 메시지 보내기
 * 메시지 관리
 * 역할 관리
 * 초대 만들기
 * 멤버 보기
-* 임베드 링크
-* DM 보내기
+* DM 전송
 
-특히 자동 역할 지급 기능을 사용하려면 봇의 역할이 지급하려는 역할보다 위에 있어야 합니다.
+특히 자동 역할 지급 기능을 사용하려면 봇의 역할이 지급하려는 역할보다 Discord 서버 역할 목록에서 더 위에 있어야 합니다.
 
-## 디스코드 개발자 포털 설정
+---
 
-봇이 멤버 입장 이벤트를 감지하려면 Discord Developer Portal에서 아래 설정을 켜야 합니다.
+## 프로젝트 구조
 
-1. Discord Developer Portal 접속
-2. Application 선택
-3. Bot 메뉴 이동
-4. Privileged Gateway Intents 설정
-5. `SERVER MEMBERS INTENT` 활성화
-6. `MESSAGE CONTENT INTENT`가 필요한 경우 활성화
-
-## 주의사항
-
-현재 코드는 Discord.js v12 문법을 기준으로 작성되어 있습니다.
-
-따라서 최신 Discord.js v14를 사용할 경우 코드 수정이 필요합니다.
-
-권장 설치 버전:
-
-```bash
-npm install discord.js@12
+```txt
+bot/
+├── index.js
+├── package.json
+├── package-lock.json
+├── LICENSE
+└── README.md
 ```
 
-## 자주 발생하는 오류
+---
 
-### Cannot read property 'send' of undefined
+## 보안 주의사항
 
-입장 또는 퇴장 메시지를 보낼 채널 이름이 잘못된 경우 발생합니다.
+Discord 봇 토큰은 절대 GitHub에 공개하면 안 됩니다.
 
-아래 값이 실제 서버 채널 이름과 같은지 확인하세요.
+토큰이 노출되었다면 Discord Developer Portal에서 즉시 토큰을 재발급해야 합니다.
 
-```js
-const welcomeChannelName = "안녕하세요"
-const byeChannelName = "안녕히가세요"
-```
+권장 사항:
 
-### 역할 지급이 되지 않는 경우
+* 봇 토큰을 코드에 직접 작성하지 않기
+* 환경변수로 토큰 관리하기
+* 불필요한 관리자 권한 부여하지 않기
+* 대량 DM 기능은 서버 운영 목적에 맞게 신중히 사용하기
+* 메시지 삭제 기능은 관리자 권한을 가진 사용자에게만 허용하기
 
-아래 사항을 확인하세요.
+---
 
-* `roleName`에 적은 역할 이름이 실제 서버 역할 이름과 같은지 확인
-* 봇에게 `역할 관리` 권한이 있는지 확인
-* 봇의 역할 위치가 지급하려는 역할보다 위에 있는지 확인
+## 개선 예정
 
-### moment is not defined
+* Discord.js 최신 버전 마이그레이션
+* 명령어 구조 모듈화
+* 설정 파일 분리
+* Slash Command 지원
+* 오류 처리 개선
+* 테스트 코드 추가
+* 한국어 설치 가이드 보강
 
-`moment`를 불러오지 않아서 발생하는 오류입니다.
+---
 
-`index.js` 상단에 아래 코드를 추가하세요.
+## 기여 방법
 
-```js
-const moment = require("moment")
-require("moment-duration-format")
-```
+이 프로젝트는 한국어 Discord 봇 개발 학습과 서버 운영 자동화를 위한 오픈소스 템플릿입니다.
 
-그리고 아래 패키지를 설치하세요.
+버그 수정, 문서 개선, 기능 추가 제안은 언제든지 환영합니다.
 
-```bash
-npm install moment moment-duration-format
-```
+기여 전에는 아래 내용을 확인해주세요.
 
-### message.member.hasPermission is not a function
+1. 코드를 이해하기 쉽게 작성해주세요.
+2. 봇 토큰이나 개인 정보를 커밋하지 말아주세요.
+3. 새로운 기능을 추가할 때는 README에 사용 방법을 함께 적어주세요.
+4. 서버 운영에 악용될 수 있는 기능은 권한 체크를 반드시 포함해주세요.
 
-Discord.js v13 이상을 사용하면 발생할 수 있습니다.
-
-이 코드는 Discord.js v12 기준이므로 아래 명령어로 v12를 설치하세요.
-
-```bash
-npm install discord.js@12
-```
+---
 
 ## 라이선스
 
-이 프로젝트는 자유롭게 수정하고 사용할 수 있습니다.
+이 프로젝트는 MIT License를 따릅니다.
+
+자세한 내용은 [LICENSE](./LICENSE) 파일을 참고하세요.
