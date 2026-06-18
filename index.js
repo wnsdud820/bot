@@ -1,17 +1,3 @@
-/*
-[ 필수 확인 ]
-
-본 코드는 나긋해님의 코드를 Discord.js v12에 맞게 변경한 코드이며,
-SERVER MEMBERS INTENT 활성화를 필요로 합니다.
-
-봇 토큰을 발급받는 페이지에서 하단으로 스크롤하면 Privileged Gateway Intents 라는 항목이 있습니다.
-해당 항목 중 SERVER MEMBERS INTENT 를 활성화 해주시면 됩니다.
-
-활성화가 됬다면 우측 버튼이 파란색으로 바뀝니다.
-
-만약 활성화하지 않고 봇을 키시면 켜지지 않습니다.
-*/
-
 const Discord = require("discord.js") 
 const intent_list = new Discord.Intents(["GUILD_MEMBERS", "GUILD_MESSAGES", "GUILDS", "GUILD_INVITES"])
 const client = new Discord.Client({ ws: { intents: intent_list } })
